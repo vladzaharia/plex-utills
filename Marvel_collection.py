@@ -16,12 +16,12 @@ movies_section = plex.library.section(films)
 added = movies_section.search(sort='titleSort')
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
-print(current_time, ": Pixar Collection script starting now")
+print(current_time, ": Marvel Collection script starting now")
 
 for movie in added:
     try:
-        if "Pixar" in movie.studio:
-            movie.addCollection('Pixar')
+        if "Marvel" in movie.studio:
+            movie.addCollection('Marvel')
             print('%s (%s)' % (movie.title, movie.studio))
     # Skip movie if there is no studio info
     except TypeError:

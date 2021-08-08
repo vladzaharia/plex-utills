@@ -21,10 +21,10 @@ def check_config():
     p = subprocess.Popen('python3 -u ./config_check.py', shell=True, stderr=subprocess.STDOUT)
     output = p.communicate()
     #print(output[0])
-    if output[0] == 'Config check passed':
+    if output[0] == 'Pass':
         print(Fore.LIGHTGREEN_EX,'Config check passed',Fore.RESET)
-    else:
-        exit()
+#    else:
+#        exit()
 
 check_config()   
 

@@ -91,7 +91,7 @@ def add_mini_banner():
     background.paste(mini_4k_banner, (0, 0), mini_4k_banner)
     background.save('poster.png')
     i.uploadPoster(filepath="poster.png")
-    
+
 def add_hdr():
     background = Image.open('poster.png')
     background = background.resize(size,Image.ANTIALIAS)
@@ -186,6 +186,7 @@ if HDR_BANNER == 'true':
     for i in films.search(resolution="4k", hdr=False):
         try:
             poster_4k()
+            i.addCollection("4K")
         except FileNotFoundError:
             print(Fore.RED+films.title+" Error, the 4k poster for this film could not be created.")
             print(Fore.RESET)
@@ -193,6 +194,8 @@ if HDR_BANNER == 'true':
     for i in films.search(resolution="4k", hdr=True):
         try:
             poster_4k_hdr()
+            i.addCollection("4K")
+            i.addCollection("HDR")
         except FileNotFoundError:
             print(Fore.RED+films.title+" Error, the 4k HDR poster for this film could not be created.")
             print(Fore.RESET)
@@ -200,6 +203,7 @@ if HDR_BANNER == 'true':
     for i in films.search(resolution="1080,720", hdr=True):
         try:
             poster_hdr()
+            i.addCollection("HDR")
         except FileNotFoundError:
             print(Fore.RED+films.title+" Error, the HDR poster for this film could not be created.")
             print(Fore.RESET)
@@ -209,6 +213,7 @@ else:
     for i in films.search(resolution="4k"):
         try:
             poster_4k()
+            i.addCollection("4K")
         except FileNotFoundError:
             print(Fore.RED+films.title+" Error, the 4k poster for this film could not be created.")
             print(Fore.RESET)
