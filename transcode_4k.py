@@ -36,6 +36,9 @@ for library in [films, tvshows]:
             resolutions = {m.videoResolution for m in e.media for e in movie.episodes}
         except:
             pass
+
+        print("Resolutions for {0}: {1}".format(movie.title, resolutions))
+        exit()
         
         if len(resolutions) < 2 and '4k' in resolutions:
             if transcode == 'False':
