@@ -38,7 +38,6 @@ for library in [films, tvshows]:
             pass
 
         print("Resolutions for {0}: {1}".format(movie.title, resolutions))
-        exit()
         
         if len(resolutions) < 2 and '4k' in resolutions:
             if transcode == 'False':
@@ -46,7 +45,7 @@ for library in [films, tvshows]:
                 print(movie.title+' has only 4k avaialble, setting untranscodable')
             elif transcode == 'true':
                 print('Sending', movie.title, 'to be transcoded')
-                movie.optimize(deviceProfile="Android", videoQuality=10)
+                movie.optimize(deviceProfile="Universal TV", videoQuality=10)
     for movie in b:
         resolutions = {m.videoResolution for m in movie.media}
         if len(resolutions) > 1 and '4k' in resolutions:

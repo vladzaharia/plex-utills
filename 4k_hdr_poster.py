@@ -114,13 +114,13 @@ def add_hdr():
 
 def get_poster():
     try:
-        newdir = os.path.dirname(
-            re.sub(ppath, mpath, i.media[0].parts[0].file))+'/'
+        newdir = i.locations[0]+'/'
     except:
         pass
 
     try:
-        newdir = i.locations[0]+'/'
+        newdir = os.path.dirname(
+            re.sub(ppath, mpath, i.media[0].parts[0].file))+'/'
     except:
         pass
 
