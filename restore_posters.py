@@ -30,7 +30,16 @@ current_time = now.strftime("%H:%M:%S")
 print(current_time, ": Restore backup posters starting now")
 
 for i in films.search():  
-    newdir = os.path.dirname(re.sub(ppath, mpath, i.media[0].parts[0].file))+'/'
+    try:
+        newdir = os.path.dirname(re.sub(ppath, mpath, i.media[0].parts[0].file))+'/'
+    except:
+        pass
+
+    try:
+        newdir = i.locations[0]+'/'
+    except:
+        pass
+
     backup = os.path.exists(newdir+'poster_bak.png') 
     if backup == True:
         poster = newdir+'poster_bak.png'

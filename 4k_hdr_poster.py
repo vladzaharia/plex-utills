@@ -107,7 +107,16 @@ def add_hdr():
         i.uploadPoster(filepath="poster.png")
 
 def get_poster():
-    newdir = os.path.dirname(re.sub(ppath, mpath, i.media[0].parts[0].file))+'/'
+    try:
+        newdir = os.path.dirname(re.sub(ppath, mpath, i.media[0].parts[0].file))+'/'
+    except:
+        pass
+
+    try:
+        newdir = i.locations[0]+'/'
+    except:
+        pass
+
     backup = os.path.exists(newdir+'poster_bak.png')
     imgurl = i.posterUrl
     img = requests.get(imgurl, stream=True)
