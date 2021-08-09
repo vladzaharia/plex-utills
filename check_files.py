@@ -1,24 +1,24 @@
 #!/usr/bin/python
 import os
+import re
 import sys
 import time
 from configparser import ConfigParser
-from plexapi.server import PlexServer
-import re
 
+from plexapi.server import PlexServer
 
 config_object = ConfigParser()
 config_object.read("config/config.ini")
 server = config_object["PLEXSERVER"]
 options = config_object["OPTIONS"]
-baseurl = (server["PLEX_URL"])
-token = (server["TOKEN"])
+baseurl = (server["Plex_URL"])
+token = (server["Token"])
 plex = PlexServer(baseurl, token)
-plexlibrary = (server["FILMSLIBRARY"])
-films = plex.library.section(plexlibrary)
-ppath = (server["PLEXPATH"])
-mpath = (server["MOUNTEDPATH"])
-xdays = int(options["CHECK_FILES_HISTORY"])
+films = plex.library.section(server["Movie_Library"])
+tvshows = plex.library.section(server["TV_Library"])
+ppath = (server["Plex_Path"])
+mpath = (server["Mnt_Path"])
+xdays = int(options["Check_Files_History"])
 
 xsize = 100000000
 now = time.time()
@@ -32,7 +32,8 @@ for i in films.search():
             if os.stat(filename).st_mtime > now - (xdays * 86400):
                 if os.stat(filename).st_size > xsize:
                     print('checking', i.title)
-                    command = "ffmpeg -v error -i \"" + filename + "\" -c:v rawvideo -map 0:1 -f null - 2>&1"
+                    command = "ffmpeg -v error -i \"" + filename + \
+                        "\" -c:v rawvideo -map 0:1 -f null - 2>&1"
                     output = os.popen(command).read()
                     print(output)
                     if output.lower().find('error') == -1:
